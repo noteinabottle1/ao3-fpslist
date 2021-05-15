@@ -6,9 +6,20 @@ Go to the Releases page and download the latest binary. To run, go to a terminal
 run:
 `./bplist-generator`
 
+To see the options, run:
+```
+./bplist-generator -help
+Usage of ./bplist-generator:
+      --authors strings   Authors with BP statements (e.g. a,b,c)
+      --id int            AO3 Fandom ID
+      --maxWords int      Max words in a fic (default 5000)
+      --minWords int      Min words in a fic (default 50)
+      --rePodsOk          check if work already has been podficced (default true)
+```
+
 ## Program Inputs
 
-There are two inputs to this script:
+There are two required inputs to this script:
 1) The fandom ID
 
 To find this, you'll need to go to a user, go to their Dashboard page, and click on the

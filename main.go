@@ -31,9 +31,15 @@ func main() {
 
 	pflag.Parse()
 
-	// TODO make this work
-	//fpsListFandomId := "13862"
-	//bpAuthors := getBPAuthorsList(fpsListFandomId)
+	// Input checking
+	if ao3FandomId == 0 {
+		log.Fatalf("Please enter a valid Ao3 Fandom Id! %d is not valid.", ao3FandomId)
+	}
+	if len(bpAuthors) == 0 {
+		log.Fatal("No authors with bp statements were passed in!")
+	}
+
+	// TODO scrape the fpslist site for the authors instead of requiring them as an input
 
 	// Output to the following CSV file
 	outputCSVFile := strconv.Itoa(ao3FandomId) + "_bplist.csv"

@@ -109,7 +109,7 @@ func parseWorks(doc *goquery.Document) [][]string {
 				fullRating := work.Find("span.rating").Find(".text").Text()
 				warnings := work.Find(".warnings").Find(".tag").Text()
 				relationships := work.Find(".relationships").Find(".tag").Text()
-				if strings.Contains(relationships, "&") {
+				if strings.Contains(relationships, "&") || relationships == "" {
 					relationships = "Gen"
 				}
 				relativeLink, _ := work.Find("a").Attr("href")

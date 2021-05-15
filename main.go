@@ -23,7 +23,7 @@ var (
 )
 
 func main() {
-	pflag.BoolVar(&rePodsOk, "rePodsOk", true, "check if work already has been podficced")
+	pflag.BoolVar(&rePodsOk, "rePodsOk", true, "no need to check if work already has been podficced")
 	pflag.IntVar(&ao3FandomId, "id", 0, "AO3 Fandom ID")
 	pflag.StringSliceVar(&bpAuthors, "authors", []string{}, "Authors with BP statements (e.g. a,b,c)")
 	pflag.IntVar(&maxWordCount, "maxWords", 5000, "Max words in a fic")

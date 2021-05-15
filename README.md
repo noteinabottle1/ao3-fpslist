@@ -14,7 +14,7 @@ Usage of ./bplist-generator:
       --id int            AO3 Fandom ID
       --maxWords int      Max words in a fic (default 5000)
       --minWords int      Min words in a fic (default 50)
-      --rePodsOk          check if work already has been podficced (default true)
+      --rePodsOk          no need to check if work already has been podficced (default true)
 ```
 
 ## Program Inputs

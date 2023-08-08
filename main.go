@@ -15,7 +15,6 @@ import (
 )
 
 var (
-	rePodsOk     bool // WARNING: setting this to false will greatly increase program execution time
 	ao3FandomId  int
 	maxWordCount int
 	minWordCount int
@@ -23,7 +22,6 @@ var (
 )
 
 func main() {
-	pflag.BoolVar(&rePodsOk, "rePodsOk", true, "no need to check if work already has been podficced")
 	pflag.IntVar(&ao3FandomId, "id", 0, "AO3 Fandom ID")
 	pflag.StringSliceVar(&bpAuthors, "authors", []string{}, "Authors with BP statements (e.g. a,b,c)")
 	pflag.IntVar(&maxWordCount, "maxWords", 5000, "Max words in a fic")
@@ -116,12 +114,9 @@ func parseWorks(doc *goquery.Document) [][]string {
 				authorLink := strings.ReplaceAll(author, " ", "%20")
 				link := fmt.Sprintf("https://archiveofourown.org/users/%v%v", authorLink, relativeLink)
 
-				// Check that it has no 'inspired works', which we'll assume to be podfics
-				if rePodsOk || noPodficsYet(link) {
-					summary := []string{name, author, string(fullRating[0]), relationships, warnings, wordsString, link}
-					works = append(works, summary)
-					fmt.Printf("%s by %s, %s words\n", name, author, wordsString)
-				}
+				summary := []string{name, author, string(fullRating[0]), relationships, warnings, wordsString, link}
+				works = append(works, summary)
+				fmt.Printf("%s by %s, %s words\n", name, author, wordsString)
 			}
 		}
 	})
@@ -146,13 +141,4 @@ func loadPage(page string) *goquery.Document {
 		return nil
 	}
 	return doc
-}
-
-func noPodficsYet(ficPage string) bool {
-	// Don't get rate limited by Ao3
-	time.Sleep(time.Second * 10)
-
-	res, _ := http.Get(ficPage + "#children")
-	defer res.Body.Close()
-	return res.StatusCode == 404
 }
